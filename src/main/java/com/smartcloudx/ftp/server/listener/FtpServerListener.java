@@ -20,14 +20,18 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.ftpserver.FtpServer;
 import org.apache.ftpserver.FtpServerFactory;
+import org.apache.ftpserver.ftplet.Authority;
 import org.apache.ftpserver.ftplet.FtpException;
 import org.apache.ftpserver.impl.DefaultFtpServer;
 import org.apache.ftpserver.listener.ListenerFactory;
 import org.apache.ftpserver.usermanager.impl.BaseUser;
+import org.apache.ftpserver.usermanager.impl.WritePermission;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -81,6 +85,10 @@ public class FtpServerListener implements ServletContextListener {
             user.setName(ftpUserName);
             user.setPassword(ftpPassword);
             user.setHomeDirectory(ftpPath);
+
+            List<Authority> authorities = new ArrayList<Authority>();
+            authorities.add(new WritePermission());
+            user.setAuthorities(authorities);
 
             factory.getUserManager().save(user);
 
