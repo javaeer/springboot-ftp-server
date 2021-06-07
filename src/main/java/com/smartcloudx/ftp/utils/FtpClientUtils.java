@@ -22,8 +22,8 @@ public class FtpClientUtils {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(FtpClientUtils.class);
 
-    public static final String ftpPath = "/ok";
-    public static final String ftpHostName = "119.3.235.54";
+    public static final String ftpPath = "/opt/ftp-resources";
+    public static final String ftpHostName = "127.0.0.1";
     public static final String ftpUserName = "ftp-3d-user";
     public static final String ftpPassword = "[ftp@3d@user]";
     public static final int ftpPort = 2221;
@@ -72,7 +72,7 @@ public class FtpClientUtils {
             ftpClient.changeWorkingDirectory(ftpPath);
 
             //上传文件
-            File file = new File("/Users/laughtiger/Downloads/千峰达摩院 微服务2.0/架构师 vue.zip");
+            File file = new File("/Users/laughtiger/Downloads/微服务2.0/架构师 vue.zip");
             in = new FileInputStream(file);
             String tempName = ftpPath + File.separator + file.getName();
             boolean flag = ftpClient.storeFile(new String(tempName.getBytes("UTF-8"), "ISO-8859-1"), in);
