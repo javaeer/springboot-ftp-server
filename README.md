@@ -11,7 +11,7 @@ Apache FTPServer
 
 #### 安装教程
 
-1. 获取项目 https://gitee.com/softeer/ftp-server.git
+1. 获取项目 https://gitee.com/softeer/ftp-server.git 或 https://github.com/javaeer/springboot-ftp-server.git
 2. 建议使用Idea IDE
 3. 运行SpringBoot 项目 [自行百度]
 
