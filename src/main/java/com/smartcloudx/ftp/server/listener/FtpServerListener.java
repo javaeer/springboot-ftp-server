@@ -18,11 +18,13 @@ package com.smartcloudx.ftp.server.listener;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.ftpserver.DataConnectionConfigurationFactory;
 import org.apache.ftpserver.FtpServer;
 import org.apache.ftpserver.FtpServerFactory;
 import org.apache.ftpserver.ftplet.Authority;
 import org.apache.ftpserver.ftplet.FtpException;
 import org.apache.ftpserver.impl.DefaultFtpServer;
+import org.apache.ftpserver.listener.Listener;
 import org.apache.ftpserver.listener.ListenerFactory;
 import org.apache.ftpserver.usermanager.impl.BaseUser;
 import org.apache.ftpserver.usermanager.impl.WritePermission;
@@ -48,8 +50,8 @@ public class FtpServerListener implements ServletContextListener {
     private Log logger = LogFactory.getLog(this.getClass());
 
     public String ftpPath = "/home/resource";
-    public String ftpUserName = "test";
-    public String ftpPassword = "123456";
+    public String ftpUserName = "ftp-3d-user";
+    public String ftpPassword = "[ftp@3d@user]";
     public int ftpPort = 2221;
 
     @Override
@@ -76,9 +78,22 @@ public class FtpServerListener implements ServletContextListener {
 
             FtpServerFactory factory = new FtpServerFactory();
             ListenerFactory listenerFactory = new ListenerFactory();
-            listenerFactory.setPort(ftpPort);
-            factory.addListener("default",listenerFactory.createListener());
 
+            //配置端口
+            listenerFactory.setPort(ftpPort);
+
+            listenerFactory.setIdleTimeout(30*60);
+
+            //设置被动模式数据上传的接口范围,云服务器需要开放对应区间的端口给客户端
+            DataConnectionConfigurationFactory dataConnectionConfFactory = new DataConnectionConfigurationFactory();
+            dataConnectionConfFactory.setPassivePorts("10000-10500");
+            listenerFactory.setDataConnectionConfiguration(dataConnectionConfFactory.createDataConnectionConfiguration());
+
+            //替换默认的监听器
+            Listener listener = listenerFactory.createListener();
+            factory.addListener("default",listener);
+
+            // 实例化FTP Server
             FtpServer server = factory.createServer();
 
             BaseUser user = new BaseUser();
@@ -96,8 +111,6 @@ public class FtpServerListener implements ServletContextListener {
 
             // 启动FTP服务
             logger.info("启动FTP服务");
-
-
 
             server.start();
         } catch (FtpException e) {
