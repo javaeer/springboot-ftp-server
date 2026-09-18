@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 使用讨论 / Discussions
+    url: https://github.com/javaeer/springboot-ftp-server/discussions
+    about: 使用问题、方案探讨请到 Discussions 交流。
+  - name: 🔒 安全漏洞上报 / Security Advisory
+    url: https://github.com/javaeer/springboot-ftp-server/security/advisories/new
+    about: 请勿在公开 Issue 披露安全漏洞，请通过安全通告私下上报。

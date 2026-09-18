@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.smartcloudx</groupId>
-	<artifactId>ftp-server</artifactId>
+	<artifactId>springboot-ftp-server</artifactId>
 	<version>1.0.0</version>
-	<name>ftp-server</name>
+	<name>springboot-ftp-server</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

@@ -1,0 +1,56 @@
+name: 🐛 Bug 报告 / Bug Report
+description: 报告一个可复现的问题
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈！请尽量提供完整信息，便于我们复现与定位。
+  - type: textarea
+    id: description
+    attributes:
+      label: 问题描述 / Description
+      description: 清晰描述你遇到了什么问题。
+      placeholder: 例如：应用启动后 FTP 客户端无法连接 2221 端口……
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 复现步骤 / Steps to Reproduce
+      description: 列出可以稳定复现该问题的步骤。
+      placeholder: |
+        1. 执行 `java -jar target/ftp-server-1.0.0.jar`
+        2. 使用 FTP 客户端连接 localhost:2221
+        3. 观察到 ……
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望行为 / Expected Behavior
+      description: 你认为正确的情况应该是什么样。
+    validations:
+      required: false
+  - type: textarea
+    id: env
+    attributes:
+      label: 环境信息 / Environment
+      description: 操作系统、JDK 版本、Spring Boot / ftpserver-core 版本等。
+      placeholder: |
+        - OS: Ubuntu 22.04 / Windows 11 / macOS 14
+        - JDK: 1.8.0_xxx
+        - Spring Boot: 2.1.1.RELEASE
+        - ftpserver-core: 1.1.0
+        - 部署方式: 裸机 jar / Docker / docker-compose
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: 日志 / 报错信息
+      description: 粘贴相关日志或异常堆栈（如有）。
+      render: shell
+    validations:
+      required: false
